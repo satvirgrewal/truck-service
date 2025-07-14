@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "truck-service",
+    "name": "Supreme Truck Service App",
     "slug": "truck-service",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
     "scheme": "truckservice",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

@@ -1,18 +1,10 @@
+import { Job } from '@/models/job';
 import { createContext, useContext, useState } from 'react';
-
-export type Job = {
-  id: string;
-  licensePlate: string;
-  mileage: string;
-  description: string;
-  timeSpent: string;
-  partsUsed: string[];
-  date: Date;
-};
 
 type JobsContextType = {
   jobs: Job[];
   addJob: (job: Omit<Job, 'id' | 'date'>) => void;
+  updateJob?: (id: string, updated: Omit<Job, 'date'>) => void;
 };
 
 const JobsContext = createContext<JobsContextType | undefined>(undefined);
@@ -31,8 +23,14 @@ export function JobsProvider({ children }: { children: React.ReactNode }) {
     ]);
   }
 
+  function updateJob(id: string, updated: Omit<Job, 'date'>) {
+    setJobs(prev =>
+      prev.map(j => (j.id === id ? { ...j, ...updated } : j))
+    );
+  }
+
   return (
-    <JobsContext.Provider value={{ jobs, addJob }}>
+    <JobsContext.Provider value={{ jobs, addJob, updateJob }}>
       {children}
     </JobsContext.Provider>
   );

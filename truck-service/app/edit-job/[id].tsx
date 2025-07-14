@@ -5,10 +5,12 @@ import { Text } from 'react-native';
 
 export default function EditJobScreen() {
 
-    const { addJob } = useJobs();
+    // const {  } = useJobs();
       const router = useRouter();
   const { id } = useLocalSearchParams();
-  const { jobs } = useJobs();
+  const { jobs, updateJob } = useJobs();
+
+
     const job = jobs.find(j => j.id === id);
     
     if (!job) {
@@ -21,8 +23,10 @@ export default function EditJobScreen() {
     <JobForm
       initialValues={job}
       onSubmit={values => {
-        addJob(values);
-            router.push('/');
+        if (updateJob) {
+          updateJob(job.id, values);
+        }
+        router.push('/');
       }}
     />
   );

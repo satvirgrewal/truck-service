@@ -2,15 +2,15 @@ import { StyleSheet, View, Text, FlatList, Button } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import {Job} from '../models/job';
+import { useJobs } from '@/context/jobs-context';
 
 export default function JobListScreen() {
-  const [jobs, setJobs] = useState<Job[]>([]);
+  const { jobs } = useJobs();
   const router = useRouter();
 
   // Filter jobs from last 7 days
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
   const recentJobs = jobs.filter(job => job.date > sevenDaysAgo);
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Jobs (Last 7 Days)</Text>
@@ -19,9 +19,14 @@ export default function JobListScreen() {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={styles.jobCard}>
-            <Text style={styles.plate}>{item.licensePlate}</Text>
-            <Text>{item.description}</Text>
-            <Text>{item.date.toDateString()}</Text>
+            <Text style={styles.plate}>License Plate: {item.licensePlate}</Text>
+            <Text>Mileage: {item.mileage}</Text>
+            <Text>Description: {item.description}</Text>
+            <Text>Time Spent: {item.timeSpent}</Text>
+            <Text>
+              Parts Used: {item.partsUsed.length > 0 ? item.partsUsed.join(', ') : 'None'}
+            </Text>
+            <Text>Date: {item.date.toLocaleString()}</Text>
             <Button
               title="Edit"
               onPress={() => router.push(`/edit-job/${item.id}`)}

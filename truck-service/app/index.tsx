@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
+import { Image, View, Text, StyleSheet, Button, FlatList } from 'react-native';
 import { Link, useNavigation } from 'expo-router';
 import { useState } from 'react';
 import { useJobs } from '@/context/jobs-context';
@@ -14,6 +14,11 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require('../assets/images/supreme-logo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
       <Text style={styles.title}>Truck Service App</Text>
       <Link href="/job-form" asChild>
         <Button title="Create New Job" />
@@ -45,6 +50,12 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: '#f5f5f5',
     padding: 16,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    alignSelf: 'center',
+    marginBottom: 16,
   },
   title: {
     fontSize: 24,
