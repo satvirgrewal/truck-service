@@ -1,24 +1,28 @@
 import JobForm from '../../components/job-form';
-import { useLocalSearchParams } from 'expo-router';
-
-// You would fetch the job by id here
-const job = {
-  licensePlate: 'ABC123',
-  mileage: '12000',
-  description: 'Oil change',
-  timeSpent: '1 hour',
-  partsUsed: ['Oil filter', 'Engine oil'],
-};
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useJobs } from '../../context/jobs-context';
+import { Text } from 'react-native';
 
 export default function EditJobScreen() {
+
+    const { addJob } = useJobs();
+      const router = useRouter();
   const { id } = useLocalSearchParams();
+  const { jobs } = useJobs();
+    const job = jobs.find(j => j.id === id);
+    
+    if (!job) {
+    return (
+      <Text style={{ padding: 20 }}>Job not found.</Text>
+    );
+  }
 
   return (
     <JobForm
       initialValues={job}
       onSubmit={values => {
-        // handle update logic
-        console.log('Edit job:', id, values);
+        addJob(values);
+            router.push('/');
       }}
     />
   );

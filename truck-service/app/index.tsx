@@ -1,31 +1,11 @@
 import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
 import { Link, useNavigation } from 'expo-router';
 import { useState } from 'react';
+import { useJobs } from '@/context/jobs-context';
 
-const initialJobs = [
-  {
-    id: '1',
-    licensePlate: 'ABC123',
-    mileage: '12000',
-    description: 'Oil change',
-    timeSpent: '1 hour',
-    partsUsed: ['Oil filter', 'Engine oil'],
-    date: new Date(), // Today
-  },
-  {
-    id: '2',
-    licensePlate: 'XYZ789',
-    mileage: '15000',
-    description: 'Brake replacement',
-    timeSpent: '2 hours',
-    partsUsed: ['Brake pads'],
-    date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
-  },
-];
 
 export default function HomeScreen() {
-  const [jobs] = useState(initialJobs);
-  //  const navigation = useNavigation();
+  const { jobs } = useJobs();
 
    // Filter jobs from last 7 days
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);

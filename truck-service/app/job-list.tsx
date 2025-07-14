@@ -1,40 +1,10 @@
 import { StyleSheet, View, Text, FlatList, Button } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-
-
-const initialJobs = [
-  {
-    id: '1',
-    licensePlate: 'ABC123',
-    mileage: '12000',
-    description: 'Oil change',
-    timeSpent: '1 hour',
-    partsUsed: ['Oil filter', 'Engine oil'],
-    date: new Date(), // Today
-  },
-  {
-    id: '2',
-    licensePlate: 'XYZ789',
-    mileage: '15000',
-    description: 'Brake replacement',
-    timeSpent: '2 hours',
-    partsUsed: ['Brake pads'],
-    date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
-  },
-  {
-    id: '3',
-    licensePlate: 'LMN456',
-    mileage: '18000',
-    description: 'Tire rotation',
-    timeSpent: '30 min',
-    partsUsed: ['None'],
-    date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000), // 10 days ago (should not show)
-  },
-];
+import {Job} from '../models/job';
 
 export default function JobListScreen() {
-  const [jobs] = useState(initialJobs);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const router = useRouter();
 
   // Filter jobs from last 7 days

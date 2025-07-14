@@ -1,12 +1,16 @@
+import { useRouter } from 'expo-router';
 import JobForm from '../components/job-form';
+import { useJobs } from '@/context/jobs-context';
 
 export default function JobFormScreen() {
-  return (
-    <JobForm
-      onSubmit={values => {
-        // handle create logic
-        console.log('Create job:', values);
-      }}
-    />
-  );
+    const { addJob } = useJobs();
+  const router = useRouter();
+    return (
+        <JobForm
+        onSubmit={values => {
+            addJob(values);
+            router.push('/'); // Navigate back to the job list after submission
+        }}
+        />
+    );
 }
