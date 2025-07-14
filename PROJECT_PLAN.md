@@ -37,6 +37,52 @@
   - Time spent
   - Parts used
 - Sketch wireframes for main screens
+
+### Sample Wireframe Sketches (Text Descriptions)
+
+**Home Screen**
+----------------
++-------------------------------+
+|   Truck Service Jobs           |
++-------------------------------+
+| [Add New Job]                 |
++-------------------------------+
+| Job #1 | License Plate | Date |
+| Job #2 | License Plate | Date |
+| ...                             |
++-------------------------------+
+
+**Job Entry Form**
+------------------
++-------------------------------+
+|   New Job Entry                |
++-------------------------------+
+| License Plate: [__________]    |
+| Mileage:      [__________]     |
+| Description:  [__________]     |
+| Time Spent:   [__________]     |
+| Parts Used:   [Add Part]       |
+|   [List of added parts]        |
++-------------------------------+
+| [Submit]                       |
++-------------------------------+
+
+**Job Summary/Confirmation**
+---------------------------
++-------------------------------+
+|   Job Summary                  |
++-------------------------------+
+| License Plate: ABC123          |
+| Mileage: 120,000               |
+| Description: Brake repair      |
+| Time Spent: 2 hours            |
+| Parts Used:                    |
+|  - Brake pads (2)              |
+|  - Rotor (1)                   |
++-------------------------------+
+| [Confirm & Save]               |
++-------------------------------+
+
 - Decide navigation flow (home → new job → job details → submit)
 
 ## Stage 2: Project Setup
