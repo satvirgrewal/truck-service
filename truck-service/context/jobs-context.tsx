@@ -1,5 +1,5 @@
-import { Job } from '@/models/job';
-import { createContext, useContext, useState } from 'react';
+import { Job } from '../models/job';
+import React, { createContext, useContext, useState } from 'react';
 
 type JobsContextType = {
   jobs: Job[];
