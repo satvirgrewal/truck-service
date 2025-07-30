@@ -1,11 +1,24 @@
 import { Image, View, Text, StyleSheet, Button, FlatList } from 'react-native';
-import { Link, useNavigation } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useJobs } from '@/context/jobs-context';
+import { useAuth } from '../context/auth-context';
 
 
 export default function HomeScreen() {
   const { jobs } = useJobs();
+  const { logout } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.replace('/auth');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Optionally show an alert to the user
+    }
+  };
 
    // Filter jobs from last 7 days
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -14,12 +27,15 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/images/supreme-logo.png')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>Truck Service App</Text>
+      <View style={styles.headerContainer}>
+        <Image
+          source={require('../assets/images/supreme-logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>Truck Service App</Text>
+        <Button title="Logout" onPress={handleLogout} style={styles.logoutButton} />
+      </View>
       <Link href="/job-form" asChild>
         <Button title="Create New Job" />
       </Link>
@@ -80,5 +96,30 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     marginBottom: 4,
+  },
+  logoutButton: {
+    // Position the button to the right within the header
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 16,
+    position: 'relative', // Needed for absolute positioning of logout button
+  },
+  logo: {
+    width: 80, // Smaller logo for header
+    height: 80,
+    marginRight: 10,
+  },
+  title: {
+    fontSize: 20, // Smaller title for header
+    fontWeight: 'bold',
+    color: '#333',
+    flex: 1, // Allow title to take available space
   },
 });
