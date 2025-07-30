@@ -30,12 +30,12 @@ This document outlines potential test cases for the Truck Service application.
 ## `edit-job/[id].tsx`
 
 ### Data Loading
-- It should correctly find and display the form for the job ID passed in the URL.
-- It should handle cases where the job ID from the URL does not exist (e.g., show a "Not Found" message or redirect).
+- **(Implemented)** It should correctly find and display the form for the job ID passed in the URL.
+- **(Implemented)** It should handle cases where the job ID from the URL does not exist (e.g., show a "Not Found" message or redirect).
 
 ## `job-list.tsx`
 
-- It should display a list of jobs created within the last 7 days.
-- It should display "No jobs in the last 7 days" when the jobs list is empty.
-- It should **not** display jobs older than 7 days.
-- Clicking the "Edit" button on a job item should navigate to `/edit-job/[id]` with the correct job ID.
+- **(Implemented)** It should display a list of jobs created within the last 7 days.
+- **(Implemented)** It should display "No jobs in the last 7 days" when the jobs list is empty.
+- **(Implemented)** It should **not** display jobs older than 7 days.
+- **(Implemented)** Clicking the "Edit" button on a job item should navigate to `/edit-job/[id]` with the correct job ID.
