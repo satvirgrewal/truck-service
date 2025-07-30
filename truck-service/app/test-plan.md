@@ -5,13 +5,12 @@ This document outlines potential test cases for the Truck Service application.
 ## `HomeScreen.tsx`
 
 ### Rendering
-- It should display the app title and logo.
-- It should show the "Create New Job" button.
+- **(Implemented)** It should display the app title, logo, and "Create New Job" button.
 
 ### Job List
-- It should display "No jobs in the last 7 days" when the jobs list is empty.
-- It should display a list of jobs created within the last 7 days.
-- It should **not** display jobs older than 7 days.
+- **(Implemented)** It should display "No jobs in the last 7 days" when the jobs list is empty.
+- **(Implemented)** It should display a list of jobs created within the last 7 days.
+- **(Implemented)** It should **not** display jobs older than 7 days.
 
 ### Navigation
 - **(Implemented)** Clicking the "Create New Job" button should navigate to the `/job-form` screen.
