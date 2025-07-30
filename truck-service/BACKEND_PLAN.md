@@ -5,7 +5,7 @@ This document details the feature set for the Firebase backend, broken down by u
 ### Core & Authentication
 
 1.  **User Registration & Login:**
-    -   Mechanics and Managers can create accounts and log in using Firebase Authentication (email/password).
+    -   Mechanics and Managers can create accounts and log in using Firebase Authentication (email/password). **(In Progress)**
     -   The system will use JWTs provided by Firebase for secure API access.
 2.  **Role-Based Access Control (RBAC):**
     -   A `role` field (`mechanic` or `manager`) will be stored with each user's profile in Firestore.
