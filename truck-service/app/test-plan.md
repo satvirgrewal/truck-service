@@ -19,13 +19,13 @@ This document outlines potential test cases for the Truck Service application.
 ## `job-form.tsx` (Component)
 
 ### Validation
-- Submitting the form with an empty license plate should display a validation error.
-- Submitting the form with an empty description should display a validation error.
+- **(Implemented)** Submitting the form with an empty license plate should display a validation error.
+- **(Implemented)** Submitting the form with an empty description should display a validation error.
 
 ### Functionality
-- When creating a new job, submitting the form should call the `addJob` function with the correct data.
-- When editing an existing job, the form fields should be pre-filled with the job's data.
-- Submitting the form in edit mode should call the `updateJob` function with the correct job ID and updated data.
+- **(Implemented)** When creating a new job, submitting the form should call the `addJob` function with the correct data.
+- **(Implemented)** When editing an existing job, the form fields should be pre-filled with the job's data.
+- **(Implemented)** Submitting the form in edit mode should call the `updateJob` function with the correct job ID and updated data.
 
 ## `edit-job/[id].tsx`
 

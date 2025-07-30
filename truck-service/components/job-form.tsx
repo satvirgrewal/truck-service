@@ -1,28 +1,23 @@
 import { useState } from 'react';
-import { View, Text, TextInput, Button, FlatList } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import { Job } from '../models/job';
 
 export default function JobForm({
-  initialValues = {},
+  job,
   onSubmit,
 }: {
-  initialValues?: {
-    licensePlate?: string;
-    mileage?: string;
-    description?: string;
-    timeSpent?: string;
-    partsUsed?: string[];
-  };
+  job?: Job;
   onSubmit: (values: any) => void;
 }) {
-
-  const [licensePlate, setLicensePlate] = useState(initialValues.licensePlate || '');
-  const [mileage, setMileage] = useState(initialValues.mileage || '');
-  const [description, setDescription] = useState(initialValues.description || '');
-  const [timeSpent, setTimeSpent] = useState(initialValues.timeSpent || '');
+  const [licensePlate, setLicensePlate] = useState(job?.licensePlate || '');
+  const [mileage, setMileage] = useState(job?.mileage || '');
+  const [description, setDescription] = useState(job?.description || '');
+  const [timeSpent, setTimeSpent] = useState(job?.timeSpent || '');
   const [partInput, setPartInput] = useState('');
-  const [partsUsed, setPartsUsed] = useState<string[]>(initialValues.partsUsed || []);
+  const [partsUsed, setPartsUsed] = useState<string[]>(job?.partsUsed || []);
+  const [errors, setErrors] = useState<{ licensePlate?: string; description?: string }>({});
 
-    const addPart = () => {
+  const addPart = () => {
     if (partInput.trim()) {
       setPartsUsed([...partsUsed, partInput.trim()]);
       setPartInput('');
@@ -30,6 +25,20 @@ export default function JobForm({
   };
 
   const handleSubmit = () => {
+    const newErrors: { licensePlate?: string; description?: string } = {};
+    if (!licensePlate.trim()) {
+      newErrors.licensePlate = 'License plate is required';
+    }
+    if (!description.trim()) {
+      newErrors.description = 'Description is required';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
     onSubmit({
       licensePlate,
       mileage,
@@ -40,22 +49,23 @@ export default function JobForm({
   };
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={styles.container}>
       <Text>License Plate:</Text>
       <TextInput
         placeholder="ABC 1234"
         value={licensePlate}
         onChangeText={setLicensePlate}
-        style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
+        style={styles.input}
       />
-      
+      {errors.licensePlate && <Text style={styles.errorText}>{errors.licensePlate}</Text>}
+
       <Text>Mileage:</Text>
       <TextInput
         placeholder="12345"
         value={mileage}
         onChangeText={setMileage}
         keyboardType="numeric"
-        style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
+        style={styles.input}
       />
 
       <Text>Description:</Text>
@@ -63,24 +73,25 @@ export default function JobForm({
         placeholder="Describe the job"
         value={description}
         onChangeText={setDescription}
-        style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
+        style={styles.input}
       />
+      {errors.description && <Text style={styles.errorText}>{errors.description}</Text>}
 
       <Text>Time Spent:</Text>
       <TextInput
         placeholder="e.g. 2 hours"
         value={timeSpent}
         onChangeText={setTimeSpent}
-        style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
+        style={styles.input}
       />
 
       <Text>Parts Used:</Text>
-      <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+      <View style={styles.partsContainer}>
         <TextInput
           placeholder="Add part"
           value={partInput}
           onChangeText={setPartInput}
-          style={{ borderWidth: 1, flex: 1, padding: 8 }}
+          style={styles.input}
         />
         <Button title="Add Part" onPress={addPart} />
       </View>
@@ -89,8 +100,27 @@ export default function JobForm({
         keyExtractor={(item, idx) => idx.toString()}
         renderItem={({ item }) => <Text>- {item}</Text>}
       />
-      
+
       <Button title="Submit Job" onPress={handleSubmit} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  input: {
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 8,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  partsContainer: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+});
