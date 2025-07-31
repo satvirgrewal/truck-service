@@ -17,7 +17,10 @@ This document outlines the major development stages for the Truck Service applic
 - **Key Activities:**
   - Set up a new Firebase project.
   - Integrate Firebase Authentication for user registration and login. **(In Progress)**
-  - Implement role-based access control (Mechanic vs. Manager).
+  - Implement role-based access control for three distinct user roles:
+    - Mechanic App
+    - Fleet Customer App
+    - Admin Panel (Web or App)
   - Migrate job data storage to Firestore. **(Implemented)**
   - Refactor the application to interact with the Firebase backend for all data operations.
 - **Status:** ⏳ In Progress

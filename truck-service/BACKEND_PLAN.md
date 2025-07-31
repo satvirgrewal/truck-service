@@ -5,34 +5,62 @@ This document details the feature set for the Firebase backend, broken down by u
 ### Core & Authentication
 
 1.  **User Registration & Login:**
-    -   Mechanics and Managers can create accounts and log in using Firebase Authentication (email/password). **(In Progress)**
+    -   Mechanics, Fleet Customers, and Admins can create accounts and log in using Firebase Authentication (email/password). **(In Progress)**
     -   The system will use JWTs provided by Firebase for secure API access.
 2.  **Role-Based Access Control (RBAC):**
-    -   A `role` field (`mechanic` or `manager`) will be stored with each user's profile in Firestore.
+    -   A `role` field (`mechanic`, `customer`, `admin`) will be stored with each user's profile in Firestore.
     -   Firestore Security Rules will be used to protect data and enforce access based on this role.
 
 ---
 
-### Mechanic-Specific Features
+### Mechanic App Features
 
-1.  **Create a Service Job:**
-    -   A logged-in Mechanic can create a new job document in the `jobs` collection in Firestore. **(Implemented)**
-    -   The backend will automatically associate the job with the mechanic's user ID.
-2.  **View Their Jobs:**
-    -   A mechanic can only read job documents where their user ID matches the `mechanicId` field. **(Implemented)**
-3.  **Update a Job:**
-    -   A mechanic can edit the details of a job they created. **(Implemented)**
+1.  **View Assigned Jobs:**
+    -   Mechanics can view a list of jobs specifically assigned to them.
+2.  **Job Details:**
+    -   Access detailed information for each job (customer, unit info, service request).
+3.  **Clock In/Out per Job:**
+    -   Record start and end times for work on a specific job.
+4.  **Upload Photos:**
+    -   Upload before/after photos related to the job (using Firebase Storage).
+5.  **Add Service Notes & Parts Used:**
+    -   Update job details with notes and a list of parts consumed.
+6.  **Complete Job and Submit:**
+    -   Mark a job as complete, triggering any necessary backend processes.
 
 ---
 
-### Manager/Dispatch-Specific Features
+### Fleet Customer App Features
 
-1.  **Central Dashboard:**
-    -   A Manager can view a list of *all* jobs from *all* mechanics.
-2.  **Advanced Job Filtering & Search:**
-    -   The app will support Firestore queries to filter jobs by date range, mechanic, or license plate.
-3.  **Job Status Management:**
-    -   Managers can change a `status` field on a job document (e.g., from `Open` to `Completed` to `Billed`).
-4.  **Billing & Cost Calculation (Future Scope):**
-    -   Introduce a `parts` collection with costs.
-    -   A Cloud Function could trigger on a job status change to `Billed` to calculate the total cost based on time and parts used.
+1.  **View Service History:**
+    -   Customers can view a history of all service jobs for their fleet.
+2.  **View Open/Closed Jobs:**
+    -   Distinguish between ongoing and completed jobs.
+3.  **Download Invoice PDFs (Future Scope):**
+    -   Access and download generated invoices.
+4.  **Request New Service:**
+    -   Submit new service requests, which will create new job entries.
+
+---
+
+### Admin Panel Features
+
+1.  **Add/Manage Mechanics & Customers:**
+    -   Create, update, and deactivate user accounts for both mechanics and customers.
+2.  **Manually Assign Jobs:**
+    -   Assign specific jobs to available mechanics.
+3.  **Monitor Mechanic Locations in Real-time (Future Scope):**
+    -   Track the live location of mechanics (requires integration with location services).
+4.  **Sync Invoices to QuickBooks (Future Scope):**
+    -   Integrate with QuickBooks API for automated invoice synchronization.
+5.  **View Reports and Service History:**
+    -   Access comprehensive reports and the full service history across all jobs and mechanics.
+
+---
+
+### Foundational Backend Components
+
+*   **Firestore Database:** To store all user, job, and related data.
+*   **Firebase Authentication:** For secure user management.
+*   **Firebase Storage:** For storing uploaded photos.
+*   **Cloud Functions:** For server-side logic (e.g., processing job completion, generating invoices, real-time location updates, QuickBooks sync).
