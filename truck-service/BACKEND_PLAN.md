@@ -16,12 +16,12 @@ This document details the feature set for the Firebase backend, broken down by u
 ### Mechanic-Specific Features
 
 1.  **Create a Service Job:**
-    -   A logged-in Mechanic can create a new job document in the `jobs` collection in Firestore.
+    -   A logged-in Mechanic can create a new job document in the `jobs` collection in Firestore. **(Implemented)**
     -   The backend will automatically associate the job with the mechanic's user ID.
 2.  **View Their Jobs:**
-    -   A mechanic can only read job documents where their user ID matches the `mechanicId` field.
+    -   A mechanic can only read job documents where their user ID matches the `mechanicId` field. **(Implemented)**
 3.  **Update a Job:**
-    -   A mechanic can edit the details of a job they created.
+    -   A mechanic can edit the details of a job they created. **(Implemented)**
 
 ---
 

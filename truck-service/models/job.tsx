@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 export type Job = {
   id: string;
   licensePlate: string;
@@ -5,5 +7,6 @@ export type Job = {
   description: string;
   timeSpent: string;
   partsUsed: string[];
-  date: Date;
+  date: Date | Timestamp;
+  mechanicId: string;
 };
