@@ -16,7 +16,7 @@ This document outlines the major development stages for the Truck Service applic
 - **Objective:** Replace local state management with a robust Firebase backend to enable data persistence, user authentication, and role-based features.
 - **Key Activities:**
   - Set up a new Firebase project.
-  - Integrate Firebase Authentication for user registration and login. **(In Progress)**
+  - Integrate Firebase Authentication for user registration and login. **(Implemented - Basic Profile Storage)**
   - Implement role-based access control for three distinct user roles:
     - Mechanic App
     - Fleet Customer App

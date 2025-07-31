@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '../lib/firebase';
+import { auth, db } from '../lib/firebase';
 import { 
   onAuthStateChanged, 
   User, 
@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword, 
   signOut 
 } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 type AuthContextType = {
   user: User | null;
@@ -35,7 +36,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signup = async (email, password) => {
-    await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    // Store user profile in Firestore with a default role
+    await setDoc(doc(db, 'users', userCredential.user.uid), {
+      email: userCredential.user.email,
+      role: 'mechanic', // Default role for new sign-ups
+    });
   };
 
   const logout = async () => {
