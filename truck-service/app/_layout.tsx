@@ -16,13 +16,14 @@ function InitialLayout() {
 
   useEffect(() => {
     if (!loading) {
-      const inAuthGroup = segments[0] === '(auth)';
+      const currentPath = segments.join('/');
+      const isAuthScreen = currentPath === 'auth';
 
-      if (user && !inAuthGroup) {
-        // Redirect authenticated users to the home screen if they are not in the auth group
+      if (user && isAuthScreen) {
+        // If user is logged in and on the auth screen, redirect to home
         router.replace('/');
-      } else if (!user && !inAuthGroup) {
-        // Redirect unauthenticated users to the auth screen if they are not in the auth group
+      } else if (!user && !isAuthScreen) {
+        // If user is not logged in and not on the auth screen, redirect to auth
         router.replace('/auth');
       }
     }

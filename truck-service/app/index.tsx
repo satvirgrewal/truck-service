@@ -36,9 +36,7 @@ export default function HomeScreen() {
         <Text style={styles.title}>Truck Service App</Text>
         <Button title="Logout" onPress={handleLogout} style={styles.logoutButton} />
       </View>
-      <Link href="/job-form" asChild>
-        <Button title="Create New Job" />
-      </Link>
+      <Button title="Create New Job" onPress={() => router.push('/job-form')} />
       <Text style={styles.subtitle}>Jobs (Last 7 Days)</Text>
       <FlatList
         data={recentJobs}
