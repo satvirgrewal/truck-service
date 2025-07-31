@@ -44,11 +44,10 @@ This document outlines potential test cases for the Truck Service application.
 
 ### Firebase Authentication (`AuthScreen`, `AuthContext`)
 - **User Registration:**
-  - Should successfully register a new user with valid credentials.
-  - Should display an error for invalid email format.
-  - Should display an error for weak passwords.
-  - Should display an error if the email is already in use.
-  - Should store a user profile document in Firestore with a default role upon successful registration. **(Implemented)**
+  - Should successfully register a new user with valid credentials. **(Implemented)**
+  - Should display an error for invalid email format. **(Implemented)**
+  - Should display an error for weak passwords. **(Implemented)**
+  - Should display an error if the email is already in use. **(Implemented)**
 - **User Login:**
   - Should successfully log in an existing user with correct credentials.
   - Should display an error for incorrect password.
