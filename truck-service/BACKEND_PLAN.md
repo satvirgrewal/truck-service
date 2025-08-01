@@ -6,10 +6,10 @@ This document details the feature set for the Firebase backend, broken down by u
 
 1.  **User Registration & Login:**
     -   Mechanics, Fleet Customers, and Admins can create accounts and log in using Firebase Authentication (email/password). **(Implemented - Basic Profile Storage)**
-    -   The system will use JWTs provided by Firebase for secure API access.
+    -   The system will use JWTs provided by Firebase for secure API access. **(Handled by Firebase SDK & Security Rules for Firestore)**
 2.  **Role-Based Access Control (RBAC):**
-    -   A `role` field (`mechanic`, `customer`, `admin`) will be stored with each user's profile in Firestore.
-    -   Firestore Security Rules will be used to protect data and enforce access based on this role.
+    -   A `role` field (`mechanic`, `customer`, `admin`) will be stored with each user's profile in Firestore. **(Implemented - via Firestore Security Rules)**
+    -   Firestore Security Rules will be used to protect data and enforce access based on this role. **(Implemented)**
 
 ---
 
